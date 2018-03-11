@@ -1,3 +1,6 @@
+<?php
+  include("assets/bd/bd.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,44 +28,30 @@
 
   <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fa fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="post.html">Sample Post</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <?php
+      include ("assets/menu/menu.php");
+    ?>
 
     <!-- Page Header -->
-    <header class="masthead" style="background-image: url('img/post-bg.jpg')">
+    <?php
+      $slct = "SELECT * FROM posts WHERE id={$_GET["id"]}";
+      $res = mysqli_query($BD, $slct);
+      $reg = mysqli_fetch_array($res);
+
+      $slct2 = "SELECT * FROM users WHERE id={$reg['user']}";
+      $res2 = mysqli_query($BD, $slct2);
+      $reg2 = mysqli_fetch_array($res2);
+    ?>
+    <header class="masthead" style="background-image: url(<?php echo "'" . $reg['img'] . "'"; ?>)">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
-              <h1>Man must explore, and this is exploration at its greatest</h1>
-              <h2 class="subheading">Problems look mighty small from 150 miles up</h2>
-              <span class="meta">Posted by
-                <a href="#">Start Bootstrap</a>
+              <h1><?php echo $reg['titulo']; ?></h1>
+              <!--<h2 class="subheading">Problems look mighty small from 150 miles up</h2> -->
+              <span class="meta">Publicado por
+                <a href="#"><?php echo $reg2['user']; ?></a>
                 on August 24, 2018</span>
             </div>
           </div>
