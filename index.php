@@ -61,7 +61,9 @@
               $res = mysqli_query($BD, $slct2);
               $reg2 = mysqli_fetch_array($res);
 
-              echo "<div class=\"post-preview\" style=\"background-image: url( "'" . $reg['img'] . "'"; ?>)\">
+              echo "<div class=\"post-preview\" style=\"background-image: url(";
+              echo  "'" . $reg['img'] . "'"; 
+              echo " )\">
             <a href=\"post.php?id={$reg['id']}\">
               <h2 class=\"post-title\">
                 {$reg['titulo']}
